@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+import { LoadingService } from 'src/app/shared/controllers/loading/loading.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +14,25 @@ export class LoginPage implements OnInit {
   public password!: FormControl;
   public loginForm!:FormGroup;
 
-  constructor() { 
+  constructor(private readonly authSrv: AuthService, private readonly navCtrl: NavController,
+    private readonly loadingSrv: LoadingService) { 
     this.initForm();
   }
 
   ngOnInit() {
   }
 
-  public doLogin() {
-    
+  public async doLogin() {
+    try {
+      await this.loadingSrv.show();
+      const { email, password} = this.loginForm.value;
+      await this.authSrv.login(email, password);
+      this.navCtrl.navigateForward("home")
+      await this.loadingSrv.dismiss()
+    } catch (error) {
+      console.error(error);
+      await this.loadingSrv.dismiss();
+    }
   }
 
   private initForm() {
