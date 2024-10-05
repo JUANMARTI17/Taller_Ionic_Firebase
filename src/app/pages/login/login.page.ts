@@ -13,6 +13,7 @@ export class LoginPage implements OnInit {
   public email!: FormControl;
   public password!: FormControl;
   public loginForm!:FormGroup;
+  public errorMessage: string | null = null;
 
   constructor(private readonly authSrv: AuthService, private readonly navCtrl: NavController,
     private readonly loadingSrv: LoadingService) { 
@@ -31,6 +32,7 @@ export class LoginPage implements OnInit {
       await this.loadingSrv.dismiss()
     } catch (error) {
       console.error(error);
+      this.errorMessage = "Invalid credentials, please try again";
       await this.loadingSrv.dismiss();
     }
   }

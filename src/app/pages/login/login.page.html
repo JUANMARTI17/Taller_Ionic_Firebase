@@ -20,6 +20,11 @@
             <app-input [control]="password" label="Password:" type="password"></app-input>
           </ion-col>
         </ion-row>
+        <ion-row *ngIf="errorMessage">
+          <ion-col>
+            <ion-text color="danger">{{ errorMessage }}</ion-text>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col>
             <app-button [disable]="loginForm.invalid" value="Login" type="submit"></app-button>
