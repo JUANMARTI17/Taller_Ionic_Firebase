@@ -1,9 +1,9 @@
-// src/app/home/home.page.ts
+
 import { Component } from '@angular/core';
 import { TareasService } from './tareas.service';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { AuthService } from '../shared/services/auth/auth.service';  // Importar el servicio de autenticación
-import { Router } from '@angular/router';  // Para redirigir después del logout
+import { AuthService } from '../shared/services/auth/auth.service';  
+import { Router } from '@angular/router';  
 
 @Component({
   selector: 'app-home',
@@ -17,13 +17,13 @@ export class HomePage {
     description: '',
     date: ''
   };
-  editMode = false;  // Indica si estamos en modo edición
-  taskIdToEdit: string | null = null;  // Para almacenar el ID de la tarea que se está editando
+  editMode = false;  
+  taskIdToEdit: string | null = null;  
 
   constructor(
     private tareasService: TareasService,
-    private authService: AuthService,  // Inyectar el servicio de autenticación
-    private router: Router  // Inyectar el enrutador para redirigir
+    private authService: AuthService,  
+    private router: Router  
   ) {}
 
   ionViewWillEnter() {
@@ -45,7 +45,7 @@ export class HomePage {
     });
   }
 
-  // Añadir o actualizar tarea
+  
   addTask() {
     if (this.newTask.title && this.newTask.description && this.newTask.date) {
       if (this.editMode && this.taskIdToEdit) {
@@ -57,29 +57,29 @@ export class HomePage {
     }
   }
 
-  // Editar tarea
+  
   editTask(task: any) {
     this.newTask = { title: task.title, description: task.description, date: task.date };
     this.taskIdToEdit = task.id;
     this.editMode = true;
   }
 
-  // Eliminar tarea
+  
   deleteTask(id: string) {
     this.tareasService.deleteTask(id);
   }
 
-  // Resetear el formulario después de añadir o editar una tarea
+  
   private resetTaskForm() {
     this.newTask = { title: '', description: '', date: '' };
     this.editMode = false;
     this.taskIdToEdit = null;
   }
 
-  // Cerrar sesión
+  
   logout() {
     this.authService.logout().then(() => {
-      this.router.navigate(['/login']);  // Redirigir a login después del logout
+      this.router.navigate(['/login']);  
     }).catch((error) => {
       console.error('Error al cerrar sesión:', error);
     });

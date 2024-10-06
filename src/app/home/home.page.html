@@ -1,9 +1,9 @@
-<!-- src/app/home/home.page.html -->
+
 <ion-header>
   <ion-toolbar>
     <ion-title>Lista de Tareas</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">Cerrar Sesión</ion-button> <!-- Botón para cerrar sesión -->
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button> 
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +11,7 @@
 <ion-content>
   <div id="container"></div>
 
-  <!-- Lista de tareas -->
+  
   <ion-list *ngIf="tasks.length > 0">
     <ion-item *ngFor="let task of tasks">
       <ion-label>
