@@ -25,5 +25,11 @@ export class AuthService {
     });
   }
 
-  
+  public sendPasswordResetEmail(email: string) {
+    return new Promise((resolve, reject) => {
+      this.fireauth.sendPasswordResetEmail(email)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+    });
+  }
 }
