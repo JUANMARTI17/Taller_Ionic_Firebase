@@ -24,4 +24,12 @@ export class AuthService {
       .catch((err) => reject(err));
     })
   }
+
+  public logout() {
+    return new Promise<void>((resolve, reject) => {
+      this.fireauth.signOut()
+        .then(() => resolve())
+        .catch((err) => reject(err));
+    });
+  }
 }
