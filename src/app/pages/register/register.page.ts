@@ -21,7 +21,7 @@ public Email!: FormControl;
 public Phone!: FormControl;
 public Password!: FormControl;
 public registerForm!: FormGroup;
-public PasswordType: 'text' | 'Password' = 'Password';
+
 
   constructor(private readonly authsrv: AuthService, private readonly loadsrv: LoadingService, private readonly navctr: NavController, private readonly firest: AngularFirestore, private readonly storaService: StorageService, private readonly toaMsj: ToastService) {
   this.initFrom();
@@ -68,9 +68,7 @@ public async doRegister(){
       console.error('Error al registrarse:', error);
     }
     }
-    public togglePassword(){
-      this.PasswordType = this.PasswordType === 'Password' ? 'text' : 'Password';
-    }
+   
 
 
 
