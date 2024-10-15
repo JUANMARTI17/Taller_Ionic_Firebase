@@ -1,5 +1,6 @@
 # Taller_Ionic_Firebase
 Integrantes:
+-Gustavo Enrique Beltrán Pulido
 -Daniel Andres Palacio Mercado
 -Juan David Martinez Gracia
 -Luis Santiago Gonzalezrubio Padilla
