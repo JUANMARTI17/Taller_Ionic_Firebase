@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-title>Lista de Tareas</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">Cerrar Sesión</ion-button> 
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -11,7 +11,7 @@
 <ion-content>
   <div id="container"></div>
 
-  
+
   <ion-list *ngIf="tasks.length > 0">
     <ion-item *ngFor="let task of tasks">
       <ion-label>
@@ -43,5 +43,16 @@
     <ion-button expand="full" type="submit">
       {{ editMode ? 'Actualizar Tarea' : 'Añadir Tarea' }}
     </ion-button>
+<ion-row>
+  <ion-col>
+    <ion-button
+      size="small"
+      color="secondary"
+      [routerLink]="['/register', id]"
+      >Update</ion-button
+    >
+  </ion-col>
+</ion-row>
+
   </form>
 </ion-content>

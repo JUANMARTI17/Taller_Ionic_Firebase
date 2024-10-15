@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
-      <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
+      <form [formGroup]="registerForm" (ngSubmit)="!id ? doRegister() : doUpdate()">
         <ion-row>
           <ion-col>
             <app-avatar [control]="Image"></app-avatar>
@@ -28,19 +28,23 @@
             <app-input [control]="Phone" label="Phone:" type="tel"></app-input>
           </ion-col>
         </ion-row>
+        @if(!id){
+
+          <ion-row>
+            <ion-col>
+              <app-input [control]="Email" label="Email:" type="email"></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-input [control]="Password" label="Password:" type="password"></app-input>
+            </ion-col>
+          </ion-row>
+        }
+
         <ion-row>
           <ion-col>
-            <app-input [control]="Email" label="Email:" type="email"></app-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <app-input [control]="Password" label="Password:" type="password"></app-input>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <app-button [disable]="registerForm.invalid" value="Register" type="submit"></app-button>
+            <app-button [disable]="registerForm.invalid" [value]="!id ? 'Register' : 'Update' " type="submit"></app-button>
           </ion-col>
         </ion-row>
       </form>

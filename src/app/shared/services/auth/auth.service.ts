@@ -40,4 +40,26 @@ export class AuthService {
         .catch((err) => reject(err));
     });
   }
+
+
+  public getCurrentUID(): Promise<string>{
+    return  new Promise((resolve, reject) => {
+      this.fireauth.currentUser.then((res) => {
+        resolve(res?. uid || "");
+      });
+    });
+  }
+
+  public isAuth () {
+    return new Promise ((resolve, reject) => {
+      this.fireauth.currentUser.then((res) => {
+        if(res?.uid) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
 }

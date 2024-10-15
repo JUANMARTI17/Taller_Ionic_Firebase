@@ -1,49 +1,31 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, set, push, remove } from 'firebase/database';
+import { getDatabase, ref, push, update, remove } from 'firebase/database';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TareasService {
-
   constructor() {}
 
-  agregarTarea(titulo: string, descripcion: string, fecha: string) {
+  agregarTarea(userId: string, title: string, description: string, date: string) {
     const db = getDatabase();
-    const tareasRef = ref(db, 'tareas');
-    const nuevaTareaRef = push(tareasRef);
-    set(nuevaTareaRef, {
-      title: titulo,
-      description: descripcion,
-      date: fecha
-    }).then(() => {
-      console.log('Tarea guardada con éxito.');
-    }).catch((error) => {
-      console.error('Error al guardar la tarea:', error);
+    const tareasRef = ref(db, `tareas/${userId}`); // Guardar tarea bajo el id de usuario
+    push(tareasRef, {
+      title,
+      description,
+      date,
     });
   }
 
-  updateTask(id: string, titulo: string, descripcion: string, fecha: string) {
+  updateTask(userId: string, taskId: string, title: string, description: string, date: string) {
     const db = getDatabase();
-    const tareaRef = ref(db, `tareas/${id}`);
-    set(tareaRef, {
-      title: titulo,
-      description: descripcion,
-      date: fecha
-    }).then(() => {
-      console.log('Tarea actualizada con éxito.');
-    }).catch((error) => {
-      console.error('Error al actualizar la tarea:', error);
-    });
+    const taskRef = ref(db, `tareas/${userId}/${taskId}`); // Actualizar tarea del usuario
+    update(taskRef, { title, description, date });
   }
 
-  deleteTask(id: string) {
+  deleteTask(userId: string, taskId: string) {
     const db = getDatabase();
-    const tareaRef = ref(db, `tareas/${id}`);
-    remove(tareaRef).then(() => {
-      console.log('Tarea eliminada con éxito.');
-    }).catch((error) => {
-      console.error('Error al eliminar la tarea:', error);
-    });
+    const taskRef = ref(db, `tareas/${userId}/${taskId}`); // Eliminar tarea del usuario
+    remove(taskRef);
   }
 }
